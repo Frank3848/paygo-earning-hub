@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* PayGo Design System - Premium Fintech Aesthetic */
+
+@layer base {
+  :root {
+    /* Base colors - Warm off-white */
+    --background: 240 15% 96%;
+    --foreground: 240 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 20% 10%;
+
+    /* Primary - Rich deep purple */
+    --primary: 262 80% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary */
+    --secondary: 240 15% 94%;
+    --secondary-foreground: 240 20% 20%;
+
+    /* Muted */
+    --muted: 240 12% 90%;
+    --muted-foreground: 240 10% 45%;
+
+    /* Accent - Vivid violet */
+    --accent: 270 72% 58%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Link color */
+    --link: 270 72% 55%;
+    --link-hover: 270 80% 45%;
+
+    /* Status colors */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Form elements */
+    --border: 240 12% 88%;
+    --input: 0 0% 100%;
+    --input-border: 240 12% 85%;
+    --ring: 270 72% 58%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 20% 20%;
+    --sidebar-primary: 270 72% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 15% 94%;
+    --sidebar-accent-foreground: 240 20% 20%;
+    --sidebar-border: 240 12% 88%;
+    --sidebar-ring: 270 72% 58%;
+
+    /* Chat widget */
+    --chat-button: 270 72% 58%;
+    --chat-button-foreground: 0 0% 100%;
+
+    /* PayGo specific tokens */
+    --paygo-purple: 270 72% 58%;
+    --paygo-purple-foreground: 0 0% 100%;
+
+    --paygo-note: 36 100% 92%;
+    --paygo-note-border: 32 90% 76%;
+    --paygo-note-foreground: 24 55% 25%;
+
+    --paygo-info: 214 88% 90%;
+    --paygo-info-border: 214 70% 78%;
+    --paygo-info-foreground: 224 44% 24%;
+  }
+
+  .dark {
+    --background: 220 25% 8%;
+    --foreground: 220 15% 95%;
+
+    --card: 220 25% 12%;
+    --card-foreground: 220 15% 95%;
+
+    --popover: 220 25% 12%;
+    --popover-foreground: 220 15% 95%;
+
+    --primary: 0 0% 100%;
+    --primary-foreground: 220 25% 8%;
+
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 220 15% 95%;
+
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 270 60% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --link: 270 60% 65%;
+    --link-hover: 270 70% 75%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 18%;
+    --input: 220 25% 15%;
+    --input-border: 220 20% 25%;
+    --ring: 270 60% 60%;
+
+    --sidebar-background: 220 25% 10%;
+    --sidebar-foreground: 220 15% 90%;
+    --sidebar-primary: 270 60% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 18%;
+    --sidebar-accent-foreground: 220 15% 90%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 270 60% 60%;
+
+    --chat-button: 270 60% 60%;
+    --chat-button-foreground: 0 0% 100%;
+
+    /* PayGo specific tokens (Buy PAY ID flow) */
+    --paygo-purple: 273 82% 62%;
+    --paygo-purple-foreground: 0 0% 100%;
+
+    --paygo-note: 36 45% 18%;
+    --paygo-note-border: 32 60% 35%;
+    --paygo-note-foreground: 36 100% 92%;
+
+    --paygo-info: 214 40% 18%;
+    --paygo-info-border: 214 55% 34%;
+    --paygo-info-foreground: 214 88% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: hsl(240 15% 96%);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 20% -10%, hsl(270 72% 58% / 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 50% at 85% 5%, hsl(240 80% 55% / 0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 10% 90%, hsl(280 65% 60% / 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 30% at 90% 95%, hsl(220 70% 60% / 0.07) 0%, transparent 45%);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .text-link {
+    @apply text-[hsl(var(--link))] hover:text-[hsl(var(--link-hover))] transition-colors;
+  }
+
+  .glass-card {
+    background: hsl(0 0% 100% / 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(270 50% 80% / 0.25);
+    box-shadow: 0 8px 32px hsl(270 60% 50% / 0.08), 0 2px 8px hsl(0 0% 0% / 0.04);
+  }
+
+  .float-orb {
+    animation: float-orb 6s ease-in-out infinite;
+  }
+}
