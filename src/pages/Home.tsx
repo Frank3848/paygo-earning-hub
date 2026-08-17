@@ -303,7 +303,7 @@ const Home = () => {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Bell className="h-5 w-5 text-white/80" />
+              <Bell className="h-5 w-5 text-white/80" aria-hidden="true" />
               <button 
                 onClick={() => navigate('/register')}
                 className="text-white text-sm font-medium flex items-center gap-1"
