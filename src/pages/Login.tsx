@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { NeedHelp } from '@/components/NeedHelp';
+import { GoogleSignInButton } from '@/components/GoogleSignInButton';
 
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
@@ -57,9 +58,10 @@ const Login = () => {
         } else if (error.message.includes('Email not confirmed')) {
           toast({
             title: 'Email not verified',
-            description: 'Please check your inbox and verify your email first.',
-            variant: 'destructive',
+            description: 'Enter the code we sent you to finish setting up your account.',
           });
+          await supabase.auth.resend({ type: 'signup', email: formData.email.trim() });
+          navigate('/verify-otp', { state: { email: formData.email.trim() } });
         } else {
           toast({
             title: 'Login failed',
@@ -167,6 +169,15 @@ const Login = () => {
               {loading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
+
+          {/* Divider */}
+          <div className="flex items-center gap-3 my-6">
+            <span className="h-px flex-1 bg-border" />
+            <span className="text-xs text-muted-foreground">or</span>
+            <span className="h-px flex-1 bg-border" />
+          </div>
+
+          <GoogleSignInButton label="Continue with Google" />
 
           {/* Register Link */}
           <p className="mt-6 text-sm text-center">
