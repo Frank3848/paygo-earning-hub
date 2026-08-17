@@ -322,6 +322,7 @@ const Home = () => {
               </p>
               <button 
                 onClick={() => setShowBalance(!showBalance)}
+                aria-label={showBalance ? 'Hide balance' : 'Show balance'}
                 className="text-white/80 hover:text-white"
               >
                 {showBalance ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
