@@ -275,6 +275,8 @@ const Home = () => {
 
       {/* Main Content - Dashboard */}
       <main className="flex-1 px-4 pb-28 pt-4">
+        <h1 className="sr-only">PayGo Dashboard — balance, transfers, airtime and data</h1>
+
         {/* Balance Card */}
         <div className="rounded-2xl p-5 text-white mb-6 shadow-2xl relative overflow-hidden"
           style={{background: 'linear-gradient(135deg, hsl(270 72% 38%) 0%, hsl(262 80% 30%) 40%, hsl(250 85% 25%) 100%)'}}>
@@ -290,6 +292,7 @@ const Home = () => {
             <div className="flex items-center gap-3">
               <button 
                 onClick={() => navigate('/profile')}
+                aria-label="Open your profile"
                 className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
               >
                 <User className="h-5 w-5 text-white" />
@@ -300,7 +303,7 @@ const Home = () => {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Bell className="h-5 w-5 text-white/80" />
+              <Bell className="h-5 w-5 text-white/80" aria-hidden="true" />
               <button 
                 onClick={() => navigate('/register')}
                 className="text-white text-sm font-medium flex items-center gap-1"
@@ -319,6 +322,7 @@ const Home = () => {
               </p>
               <button 
                 onClick={() => setShowBalance(!showBalance)}
+                aria-label={showBalance ? 'Hide balance' : 'Show balance'}
                 className="text-white/80 hover:text-white"
               >
                 {showBalance ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
