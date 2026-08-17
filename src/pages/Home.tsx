@@ -292,6 +292,7 @@ const Home = () => {
             <div className="flex items-center gap-3">
               <button 
                 onClick={() => navigate('/profile')}
+                aria-label="Open your profile"
                 className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
               >
                 <User className="h-5 w-5 text-white" />
