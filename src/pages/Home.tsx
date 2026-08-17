@@ -275,6 +275,8 @@ const Home = () => {
 
       {/* Main Content - Dashboard */}
       <main className="flex-1 px-4 pb-28 pt-4">
+        <h1 className="sr-only">PayGo Dashboard — balance, transfers, airtime and data</h1>
+
         {/* Balance Card */}
         <div className="rounded-2xl p-5 text-white mb-6 shadow-2xl relative overflow-hidden"
           style={{background: 'linear-gradient(135deg, hsl(270 72% 38%) 0%, hsl(262 80% 30%) 40%, hsl(250 85% 25%) 100%)'}}>
