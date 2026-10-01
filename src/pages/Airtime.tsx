@@ -42,7 +42,7 @@ const Airtime = () => {
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="flex items-center justify-between px-4 py-4">
-          <button 
+          <button aria-label="Go back" 
             onClick={() => navigate('/home')}
             className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100"
           >

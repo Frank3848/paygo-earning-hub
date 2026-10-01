@@ -377,7 +377,7 @@ const Home = () => {
         {/* Current Promotions */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-base font-bold" style={{color: 'hsl(250 30% 20%)'}}>Current Promotions</h3>
+            <h2 className="text-base font-bold" style={{color: 'hsl(250 30% 20%)'}}>Current Promotions</h2>
             <span className="text-xs font-semibold px-2 py-0.5 rounded-full"
               style={{background: 'hsl(270 72% 58% / 0.12)', color: 'hsl(270 72% 42%)'}}>
               {currentPromo + 1} / {promotions.length}
@@ -407,14 +407,14 @@ const Home = () => {
 
             {/* Navigation Arrows */}
             <button 
-              onClick={prevPromo}
+              onClick={prevPromo} aria-label="Previous promotion"
               className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center transition-colors"
               style={{background: 'hsl(0 0% 100% / 0.25)', backdropFilter: 'blur(8px)', border: '1px solid hsl(0 0% 100% / 0.30)'}}
             >
               <ChevronLeft className="h-5 w-5 text-white" />
             </button>
             <button 
-              onClick={nextPromo}
+              onClick={nextPromo} aria-label="Next promotion"
               className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center transition-colors"
               style={{background: 'hsl(0 0% 100% / 0.25)', backdropFilter: 'blur(8px)', border: '1px solid hsl(0 0% 100% / 0.30)'}}
             >
@@ -426,7 +426,7 @@ const Home = () => {
               {promotions.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentPromo(index)}
+                  onClick={() => setCurrentPromo(index)} aria-label={`Go to promotion ${index + 1}`}
                   className="transition-all duration-300"
                   style={{
                     width: index === currentPromo ? '20px' : '8px',
@@ -443,7 +443,7 @@ const Home = () => {
         {/* Recent Transactions */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-base font-bold" style={{color: 'hsl(250 30% 20%)'}}>Recent Transactions</h3>
+            <h2 className="text-base font-bold" style={{color: 'hsl(250 30% 20%)'}}>Recent Transactions</h2>
             <button className="text-xs font-semibold" style={{color: 'hsl(270 72% 50%)'}}>See all</button>
           </div>
 
