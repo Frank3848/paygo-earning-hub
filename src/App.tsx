@@ -28,6 +28,7 @@ import Transfer from "./pages/Transfer";
 import TransferProcessing from "./pages/TransferProcessing";
 import TransferSuccess from "./pages/TransferSuccess";
 import NotFound from "./pages/NotFound";
+import { RouteMeta } from "./components/RouteMeta";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <RouteMeta />
         <Routes>
           <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
