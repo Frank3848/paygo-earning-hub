@@ -18,7 +18,7 @@ const Communities = () => {
     <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
       <header className="flex items-center gap-4 p-4 border-b border-gray-200">
-        <button onClick={() => navigate(-1)} className="p-1">
+        <button aria-label="Go back" onClick={() => navigate(-1)} className="p-1">
           <ArrowLeft className="h-6 w-6 text-foreground" />
         </button>
         <h1 className="text-xl font-semibold text-foreground">Join Our Communities</h1>

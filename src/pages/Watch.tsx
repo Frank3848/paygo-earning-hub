@@ -65,7 +65,7 @@ const Watch = () => {
     <div className="min-h-screen bg-gray-900 flex flex-col">
       {/* Header */}
       <header className="flex items-center gap-4 p-4 border-b border-gray-800">
-        <button onClick={() => navigate('/home')} className="p-1">
+        <button aria-label="Go back" onClick={() => navigate('/home')} className="p-1">
           <ArrowLeft className="h-6 w-6 text-white" />
         </button>
         <h1 className="text-xl font-semibold text-white">Watch</h1>
