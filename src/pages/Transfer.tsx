@@ -20,7 +20,12 @@ import {
 } from '@/components/ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
 
-const VALID_PAY_ID_CODE = 'ID667618';
+// Only a one-way fingerprint of the valid code is stored — the code itself never appears.
+const VALID_CODE_HASH = 'a630a72182cbc19982d899f7024008037bc1baad7d06934bea28b7bd2fb3020b';
+const hashCode = async (value: string) => {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+};
 
 const banks = [
   'Access Bank', 'First Bank', 'GTBank', 'UBA', 'Zenith Bank', 'Kuda Bank',
@@ -60,9 +65,10 @@ const Transfer = () => {
     }
 
     setIsVerifying(true);
-    setTimeout(() => {
+    setTimeout(async () => {
+      const valid = (await hashCode(payIdCode.trim().toUpperCase())) === VALID_CODE_HASH;
       setIsVerifying(false);
-      if (payIdCode.trim().toUpperCase() !== VALID_PAY_ID_CODE) {
+      if (!valid) {
         setShowInvalidDialog(true);
         return;
       }
@@ -135,7 +141,7 @@ const Transfer = () => {
         <Input
           placeholder="Account Name"
           value={accountName}
-          onChange={(e) => setAccountName(e.target.value.toUpperCase())}
+          onChange={(e) => setAccountName(e.target.value)}
           className="h-14 bg-white border-gray-200 rounded-xl text-base placeholder:text-muted-foreground"
         />
 
