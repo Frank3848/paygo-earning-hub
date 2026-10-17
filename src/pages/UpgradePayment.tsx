@@ -14,9 +14,9 @@ const UpgradePayment = () => {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const accountNumber = '1002550677';
-  const bankName = 'Sparkle';
-  const accountName = 'Frank Joseph';
+  const accountNumber = '7056998378';
+  const bankName = 'Moniepoint MFB';
+  const accountName = 'Joshua Agu Bitrus';
 
   const handleCopyAccountNumber = () => {
     navigator.clipboard.writeText(accountNumber);
