@@ -15,10 +15,10 @@ interface UserProfile {
 }
 
 const defaultProfile: UserProfile = {
-  fullName: "Frank",
-  email: "sureplug3848@gmail.com",
-  phone: "+234 801 234 5678",
-  about: "PayGo user since 2023"
+  fullName: "",
+  email: "",
+  phone: "",
+  about: ""
 };
 
 const Profile = () => {
