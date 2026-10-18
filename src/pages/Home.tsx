@@ -6,6 +6,8 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 import { UpgradeDrawer } from '@/components/UpgradeDrawer';
 import { BottomNav } from '@/components/BottomNav';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { supabase } from '@/integrations/supabase/client';
 import paygoLogo from '@/assets/paygo-logo.png';
 import promoTransactWin from '@/assets/promo-transact-win.jpg';
 import promoBasketball from '@/assets/promo-basketball.jpg';
@@ -116,50 +118,6 @@ const promotions = [
 
 const transactions = [
   {
-    id: 1,
-    icon: ArrowUpRight,
-    iconBg: 'hsl(0 72% 96%)',
-    iconColor: 'hsl(0 72% 50%)',
-    title: 'Bank Transfer',
-    subtitle: 'To GTBank • ****4521',
-    amount: '-₦25,000',
-    amountColor: 'hsl(0 72% 50%)',
-    time: 'Today, 2:14 PM',
-  },
-  {
-    id: 2,
-    icon: ArrowDownLeft,
-    iconBg: 'hsl(142 72% 94%)',
-    iconColor: 'hsl(142 60% 35%)',
-    title: 'Transfer Received',
-    subtitle: 'From Emeka Obi',
-    amount: '+₦50,000',
-    amountColor: 'hsl(142 60% 35%)',
-    time: 'Today, 11:02 AM',
-  },
-  {
-    id: 3,
-    icon: Phone,
-    iconBg: 'hsl(210 80% 94%)',
-    iconColor: 'hsl(210 80% 45%)',
-    title: 'Airtime Purchase',
-    subtitle: 'MTN • 0803 456 7890',
-    amount: '-₦1,000',
-    amountColor: 'hsl(0 72% 50%)',
-    time: 'Yesterday, 6:45 PM',
-  },
-  {
-    id: 4,
-    icon: Wifi,
-    iconBg: 'hsl(270 72% 95%)',
-    iconColor: 'hsl(270 72% 50%)',
-    title: 'Data Bundle',
-    subtitle: 'Airtel • 5GB Plan',
-    amount: '-₦2,500',
-    amountColor: 'hsl(0 72% 50%)',
-    time: 'Yesterday, 3:30 PM',
-  },
-  {
     id: 5,
     icon: ShoppingBag,
     iconBg: 'hsl(38 100% 93%)',
@@ -168,12 +126,14 @@ const transactions = [
     subtitle: 'PayGo Rewards',
     amount: '+₦180,000',
     amountColor: 'hsl(142 60% 35%)',
-    time: 'Mar 12, 9:00 AM',
+    time: 'On sign up',
   },
 ];
 
 const Home = () => {
   const navigate = useNavigate();
+  const user = useCurrentUser();
+  const firstName = (user?.fullName || '').split(' ')[0];
   const [showOnboarding, setShowOnboarding] = useState(() => {
     // Check if user has completed onboarding before
     return localStorage.getItem('onboardingComplete') !== 'true';
@@ -187,6 +147,13 @@ const Home = () => {
     return saved ? parseFloat(saved) : 180000;
   });
   const totalSteps = 5;
+
+  useEffect(() => {
+    if (!user) return;
+    setShowOnboarding(localStorage.getItem('onboardingComplete') !== 'true');
+    const b = localStorage.getItem('walletBalance');
+    if (b) setBalance(parseFloat(b));
+  }, [user?.id]);
 
   // Initialize balance in localStorage if not set
   useEffect(() => {
@@ -298,14 +265,14 @@ const Home = () => {
                 <User className="h-5 w-5 text-white" />
               </button>
               <div>
-                <p className="text-base font-medium">Hi, Frank 👋</p>
+                <p className="text-base font-medium">Hi, {firstName} 👋</p>
                 <p className="text-white/80 text-sm">Welcome back!</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <Bell className="h-5 w-5 text-white/80" aria-hidden="true" />
               <button 
-                onClick={() => navigate('/register')}
+                onClick={async () => { await supabase.auth.signOut(); navigate('/login'); }}
                 className="text-white text-sm font-medium flex items-center gap-1"
               >
                 <LogOut className="h-4 w-4" />
@@ -492,7 +459,7 @@ const Home = () => {
                 <X className="h-6 w-6" />
               </button>
               <h2 className="text-2xl font-bold text-white mb-2">
-                Welcome to PayGo, Frank!
+                Welcome to PayGo{firstName ? `, ${firstName}` : ''}!
               </h2>
               <p className="text-white/90 text-sm mb-4">
                 Step {currentStep} of {totalSteps}

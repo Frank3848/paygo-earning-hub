@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 const BuyPayIdPayment = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { fullName, email, amount } = location.state || { fullName: 'Frank', email: 'sureplug3848@gmail.com', amount: 6500 };
+  const { fullName, email, amount } = location.state || { fullName: '', email: '', amount: 6500 };
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 

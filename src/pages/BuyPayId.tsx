@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 
 interface UserProfile {
@@ -13,16 +14,23 @@ interface UserProfile {
 }
 
 const defaultProfile: UserProfile = {
-  fullName: "Frank",
-  email: "sureplug3848@gmail.com",
-  phone: "+234 801 234 5678",
-  about: "PayGo user since 2023"
+  fullName: "",
+  email: "",
+  phone: "",
+  about: ""
 };
 
 const BuyPayId = () => {
   const navigate = useNavigate();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const user = useCurrentUser();
+  useEffect(() => {
+    if (!user) return;
+    const saved = JSON.parse(localStorage.getItem('userProfile') || '{}');
+    setFullName(saved.fullName || user.fullName);
+    setEmail(saved.email || user.email);
+  }, [user?.id]);
 
   // Auto-fill from user profile on mount
   useEffect(() => {
