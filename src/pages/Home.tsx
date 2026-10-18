@@ -281,12 +281,12 @@ const Home = () => {
         <div className="rounded-2xl p-5 text-white mb-6 shadow-2xl relative overflow-hidden"
           style={{background: 'linear-gradient(135deg, hsl(270 72% 38%) 0%, hsl(262 80% 30%) 40%, hsl(250 85% 25%) 100%)'}}>
           {/* Card inner shimmer orbs */}
-          <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full opacity-30"
+          <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full opacity-30 pointer-events-none"
             style={{background: 'radial-gradient(circle, hsl(280 80% 80%) 0%, transparent 70%)', filter: 'blur(20px)'}} />
-          <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full opacity-20"
+          <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full opacity-20 pointer-events-none"
             style={{background: 'radial-gradient(circle, hsl(240 80% 70%) 0%, transparent 70%)', filter: 'blur(16px)'}} />
           {/* Subtle dot grid overlay */}
-          <div className="absolute inset-0 opacity-10"
+          <div className="absolute inset-0 opacity-10 pointer-events-none"
             style={{backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '18px 18px'}} />
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
