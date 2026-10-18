@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 import paygoLogo from "@/assets/paygo-logo.png";
 
 interface UserProfile {
@@ -27,6 +28,15 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState<UserProfile>(defaultProfile);
   const [editedProfile, setEditedProfile] = useState<UserProfile>(defaultProfile);
+
+  const user = useCurrentUser();
+  useEffect(() => {
+    if (!user) return;
+    const saved = JSON.parse(localStorage.getItem('userProfile') || '{}');
+    const p = { ...defaultProfile, ...saved, fullName: saved.fullName || user.fullName, email: saved.email || user.email };
+    setProfile(p);
+    setEditedProfile(p);
+  }, [user?.id]);
 
   // Load profile from localStorage on mount
   useEffect(() => {
